@@ -8,63 +8,6 @@
 
 import UIKit
 
-extension UIView {
-    class func fromNib<T: UIView>() -> T {
-        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
-    }
-}
-
-class NavigationController : UINavigationController {
-    
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        
-        if let topVC = viewControllers.last {
-            //return the status property of each VC, look at step 2
-            return topVC.preferredStatusBarStyle
-        }
-        
-        return .default
-    }
-}
-
-extension UIColor {
-    convenience init(hexString:String) {
-        let hexString:NSString = hexString.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) as NSString
-        let scanner            = Scanner(string: hexString as String)
-        
-        if (hexString.hasPrefix("#")) {
-            scanner.scanLocation = 1
-        }
-        
-        var color:UInt32 = 0
-        scanner.scanHexInt32(&color)
-        
-        let mask = 0x000000FF
-        let r = Int(color >> 16) & mask
-        let g = Int(color >> 8) & mask
-        let b = Int(color) & mask
-        
-        let red   = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
-        
-        self.init(red:red, green:green, blue:blue, alpha:1)
-    }
-    
-    func toHexString() -> String {
-        var r:CGFloat = 0
-        var g:CGFloat = 0
-        var b:CGFloat = 0
-        var a:CGFloat = 0
-        
-        getRed(&r, green: &g, blue: &b, alpha: &a)
-        
-        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        
-        return NSString(format:"#%06x", rgb) as String
-    }
-}
-
 class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate {
     
     enum HSVSections: Int, CaseIterable {
@@ -101,18 +44,38 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
     var brightnessCell: SliderTableViewCell!
     var selectedElement: ElementToStyle = .button
     
+    var resetValues: Dictionary<ElementToStyle, UIColor> = [
+        .button: UIColor(hue: 211/359, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+        .title: UIColor(white: 0.2, alpha: 1.0),
+        .bar: UIColor(white: 0.95, alpha: 1.0)]
+    
+    @IBOutlet weak var hexField: UITextField!
+    @IBOutlet weak var swatchView: UIView!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var elementSelector: UISegmentedControl!
+    
     var buttonColor: UIColor! {
         didSet {
+            navigationController?.navigationBar.tintColor = buttonColor
+            elementSelector.tintColor = buttonColor
+            saveButton.tintColor = buttonColor
+            
             DefaultsManager.saveColor(color: buttonColor, forKey: .buttonColor)
         }
     }
     var titleTextColor: UIColor! {
         didSet {
+         
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleTextColor!]
+            
             DefaultsManager.saveColor(color: titleTextColor, forKey: .titleColor)
         }
     }
     var barColor: UIColor! {
         didSet {
+            
+            navigationController?.navigationBar.barTintColor = barColor
+            
             DefaultsManager.saveColor(color: barColor, forKey: .barColor)
         }
     }
@@ -129,9 +92,6 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    @IBOutlet weak var hexField: UITextField!
-    @IBOutlet weak var swatchView: UIView!
-    
     
     var statusBarStyle: UIStatusBarStyle = .default {
         didSet(newValue) {
@@ -140,8 +100,6 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
             }
         }
     }
-    
-    @IBOutlet weak var elementSelector: UISegmentedControl!
     
     func updateGradients() {
         let hue = CGFloat(hueCell.slider!.value)
@@ -170,14 +128,10 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         
         switch selectedElement {
         case .button:
-            navigationController?.navigationBar.tintColor = selectedColor
-            elementSelector.tintColor = selectedColor
             buttonColor = selectedColor
         case .title:
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: selectedColor]
             titleTextColor = selectedColor
         case .bar:
-            navigationController?.navigationBar.barTintColor = selectedColor
             barColor = selectedColor
             
             if (brightness < 0.4) {
@@ -268,16 +222,44 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         return false
     }
     
+    @objc func handleReset() {
+        
+        buttonColor = resetValues[.button]
+        titleTextColor = resetValues[.title]
+        barColor = resetValues[.bar]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         
         hueCell = SliderTableViewCell.fromNib()
         saturationCell = SliderTableViewCell.fromNib()
         brightnessCell = SliderTableViewCell.fromNib()
         
         sliderCells = [hueCell, saturationCell, brightnessCell]
+
+        if let color = DefaultsManager.colorForKey(.buttonColor) {
+            buttonColor = color
+        } else {
+            buttonColor = resetValues[.button]
+        }
         
-        updateGradients()
+        if let color = DefaultsManager.colorForKey(.titleColor) {
+            titleTextColor = color
+        } else {
+            titleTextColor = resetValues[.title]
+        }
+        
+        if let color = DefaultsManager.colorForKey(.barColor) {
+            barColor = color
+        } else {
+            barColor = resetValues[.bar]
+        }
+        
+        storedColors = DefaultsManager.storedColors()
+        
         
         for cell in sliderCells {
             cell.sliderDidChange = {
@@ -295,26 +277,6 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let color = DefaultsManager.colorForKey(.buttonColor) {
-            buttonColor = color
-        } else {
-            buttonColor = elementSelector.tintColor
-        }
-        
-        if let color = DefaultsManager.colorForKey(.titleColor) {
-            titleTextColor = color
-        } else {
-            titleTextColor = UIColor.darkGray
-        }
-        
-        if let color = DefaultsManager.colorForKey(.barColor) {
-            barColor = color
-        } else {
-            barColor = UIColor(white: 0.95, alpha: 1.0)
-        }
-        
-        storedColors = DefaultsManager.storedColors()
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
@@ -373,7 +335,7 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == HSVSections.storedColors.rawValue {
             updateForNewColor(storedColors[indexPath.row])
-            tableView.deselectRow(at: indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
 
@@ -396,4 +358,65 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
+}
+
+// MARK: Convenience extensions
+
+extension UIView {
+    class func fromNib<T: UIView>() -> T {
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+}
+
+extension UIColor {
+    convenience init(hexString:String) {
+        let hexString:NSString = hexString.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) as NSString
+        let scanner            = Scanner(string: hexString as String)
+        
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        
+        var color:UInt32 = 0
+        scanner.scanHexInt32(&color)
+        
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red:red, green:green, blue:blue, alpha:1)
+    }
+    
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return NSString(format:"#%06x", rgb) as String
+    }
+}
+
+//MARK: Subclass nav controller for status bar behavior
+
+class NavigationController : UINavigationController {
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        
+        if let topVC = viewControllers.last {
+            //return the status property of each VC, look at step 2
+            return topVC.preferredStatusBarStyle
+        }
+        
+        return .default
+    }
 }
