@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ColorThemeTableViewController" customModule="ColorThemeLab" customModuleProvider="target">
+            <connections>
+                <outlet property="elementSelector" destination="zJQ-7T-rQx" id="5d6-J0-6Sq"/>
+                <outlet property="hexField" destination="lEF-7I-Lsg" id="Xfu-EJ-onr"/>
+                <outlet property="swatchView" destination="g7r-FT-akm" id="sVf-Je-MdN"/>
+                <outlet property="view" destination="5IK-8E-dbG" id="lgE-XD-ZEq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5IK-8E-dbG">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <view key="tableHeaderView" contentMode="scaleToFill" id="eeo-em-EDU">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zJQ-7T-rQx">
+                        <rect key="frame" x="29" y="8" width="356" height="29"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <segments>
+                            <segment title="Button Color"/>
+                            <segment title="Title Color"/>
+                            <segment title="Bar Color"/>
+                        </segments>
+                        <connections>
+                            <action selector="handleToggle:" destination="-1" eventType="valueChanged" id="uLv-Za-xLx"/>
+                        </connections>
+                    </segmentedControl>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="#000000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEF-7I-Lsg">
+                        <rect key="frame" x="157" y="50" width="100" height="30"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" keyboardAppearance="alert" returnKeyType="done"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="acx-oL-BK9"/>
+                        </connections>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdm-L5-Dn1">
+                        <rect key="frame" x="266" y="51" width="119" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Save"/>
+                        <connections>
+                            <action selector="handleColorSave:" destination="-1" eventType="touchUpInside" id="Lbu-5p-go9"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g7r-FT-akm">
+                        <rect key="frame" x="29" y="50" width="97" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="lEF-7I-Lsg" secondAttribute="bottom" constant="9" id="2ZQ-wY-xvr"/>
+                    <constraint firstItem="lEF-7I-Lsg" firstAttribute="centerX" secondItem="eeo-em-EDU" secondAttribute="centerX" id="NtA-br-edC"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="EYY-0m-iLX"/>
+                <outlet property="delegate" destination="-1" id="lsB-20-h6G"/>
+            </connections>
+            <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
+        </tableView>
+    </objects>
+</document>
