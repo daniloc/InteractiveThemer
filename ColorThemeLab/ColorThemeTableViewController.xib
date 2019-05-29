@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="elementSelector" destination="zJQ-7T-rQx" id="5d6-J0-6Sq"/>
                 <outlet property="hexField" destination="lEF-7I-Lsg" id="Xfu-EJ-onr"/>
+                <outlet property="saveButton" destination="rdm-L5-Dn1" id="HYg-vR-YeJ"/>
                 <outlet property="swatchView" destination="g7r-FT-akm" id="sVf-Je-MdN"/>
                 <outlet property="view" destination="5IK-8E-dbG" id="lgE-XD-ZEq"/>
             </connections>
@@ -34,6 +35,7 @@
                             <segment title="Title Color"/>
                             <segment title="Bar Color"/>
                         </segments>
+                        <color key="tintColor" red="0.00012962514301761985" green="0.4781872034072876" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <action selector="handleToggle:" destination="-1" eventType="valueChanged" id="uLv-Za-xLx"/>
                         </connections>
@@ -50,6 +52,7 @@
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdm-L5-Dn1">
                         <rect key="frame" x="266" y="51" width="119" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <state key="normal" title="Save"/>
                         <connections>
                             <action selector="handleColorSave:" destination="-1" eventType="touchUpInside" id="Lbu-5p-go9"/>
