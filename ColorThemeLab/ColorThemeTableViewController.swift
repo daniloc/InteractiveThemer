@@ -9,6 +9,8 @@
 import UIKit
 
 class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate {
+
+    //MARK: Enums
     
     enum HSVSections: Int, CaseIterable {
         case hue,
@@ -35,6 +37,10 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         title,
         bar
     }
+    
+    //MARK: -
+    
+    //MARK: Variables and outlets
     
     let storedColorCellReuseIdentifier = "colorCell"
     
@@ -101,6 +107,8 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
+    //MARK: Color state maintenance
+    
     func updateGradients() {
         let hue = CGFloat(hueCell.slider!.value)
         let saturation = CGFloat(saturationCell.slider!.value)
@@ -142,10 +150,6 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         }
         
         hexField.text = selectedColor.toHexString().uppercased()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
     }
     
     fileprivate func updateSliders() {
@@ -227,6 +231,13 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         buttonColor = resetValues[.button]
         titleTextColor = resetValues[.title]
         barColor = resetValues[.bar]
+    }
+    
+    //MARK: -
+    //MARK: View Controller
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle
     }
     
     override func viewDidLoad() {
