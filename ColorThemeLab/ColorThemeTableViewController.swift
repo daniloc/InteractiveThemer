@@ -12,6 +12,7 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
 
     //MARK: Enums
     
+    //Use enum for table section structure
     enum HSVSections: Int, CaseIterable {
         case hue,
         saturation,
@@ -107,6 +108,7 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
+    //MARK: -
     //MARK: Color state maintenance
     
     func updateGradients() {
@@ -374,12 +376,14 @@ class ColorThemeTableViewController: UITableViewController, UITextFieldDelegate 
 // MARK: Convenience extensions
 
 extension UIView {
+    //via: https://stackoverflow.com/a/36388769/150181
     class func fromNib<T: UIView>() -> T {
         return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
     }
 }
 
 extension UIColor {
+    //adapted from: https://gist.github.com/yannickl/16f0ed38f0698d9a8ae7
     convenience init(hexString:String) {
         let hexString:NSString = hexString.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) as NSString
         let scanner            = Scanner(string: hexString as String)
@@ -418,9 +422,8 @@ extension UIColor {
 }
 
 //MARK: Subclass nav controller for status bar behavior
-
 class NavigationController : UINavigationController {
-    
+    //via: https://stackoverflow.com/a/53340663/150181
     override var preferredStatusBarStyle : UIStatusBarStyle {
         
         if let topVC = viewControllers.last {
