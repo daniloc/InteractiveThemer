@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F34856C229ED37A00C95C1D /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F34856B229ED37A00C95C1D /* DefaultsManager.swift */; };
+		9F34856F229EE1E000C95C1D /* StoredColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F34856D229EE1E000C95C1D /* StoredColorTableViewCell.swift */; };
+		9F348570229EE1E000C95C1D /* StoredColorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F34856E229EE1E000C95C1D /* StoredColorTableViewCell.xib */; };
 		9FE97E5C2295E66E00D43447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E5B2295E66E00D43447 /* AppDelegate.swift */; };
-		9FE97E5E2295E66E00D43447 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E5D2295E66E00D43447 /* ViewController.swift */; };
 		9FE97E612295E66E00D43447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FE97E5F2295E66E00D43447 /* Main.storyboard */; };
 		9FE97E632295E67000D43447 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FE97E622295E67000D43447 /* Assets.xcassets */; };
 		9FE97E662295E67000D43447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FE97E642295E67000D43447 /* LaunchScreen.storyboard */; };
 		9FE97E712295E67000D43447 /* ColorThemeLabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E702295E67000D43447 /* ColorThemeLabTests.swift */; };
 		9FE97E7C2295E67000D43447 /* ColorThemeLabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E7B2295E67000D43447 /* ColorThemeLabUITests.swift */; };
+		9FE97E8A2295E6AD00D43447 /* ColorThemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E892295E6AD00D43447 /* ColorThemeTableViewController.swift */; };
+		9FE97E8C2295E77600D43447 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E8B2295E77600D43447 /* InitialViewController.swift */; };
+		9FE97E8E2295E80900D43447 /* ColorThemeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FE97E8D2295E80900D43447 /* ColorThemeTableViewController.xib */; };
+		9FE97E902295E8D000D43447 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FE97E8F2295E8D000D43447 /* SliderTableViewCell.xib */; };
+		9FE97E922296EBF800D43447 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE97E912296EBF800D43447 /* SliderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F34856B229ED37A00C95C1D /* DefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
+		9F34856D229EE1E000C95C1D /* StoredColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredColorTableViewCell.swift; sourceTree = "<group>"; };
+		9F34856E229EE1E000C95C1D /* StoredColorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoredColorTableViewCell.xib; sourceTree = "<group>"; };
 		9FE97E582295E66E00D43447 /* ColorThemeLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorThemeLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE97E5B2295E66E00D43447 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9FE97E5D2295E66E00D43447 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9FE97E602295E66E00D43447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9FE97E622295E67000D43447 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FE97E652295E67000D43447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +56,11 @@
 		9FE97E772295E67000D43447 /* ColorThemeLabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorThemeLabUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE97E7B2295E67000D43447 /* ColorThemeLabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeLabUITests.swift; sourceTree = "<group>"; };
 		9FE97E7D2295E67000D43447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FE97E892295E6AD00D43447 /* ColorThemeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeTableViewController.swift; sourceTree = "<group>"; };
+		9FE97E8B2295E77600D43447 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		9FE97E8D2295E80900D43447 /* ColorThemeTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorThemeTableViewController.xib; sourceTree = "<group>"; };
+		9FE97E8F2295E8D000D43447 /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
+		9FE97E912296EBF800D43447 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +112,15 @@
 			isa = PBXGroup;
 			children = (
 				9FE97E5B2295E66E00D43447 /* AppDelegate.swift */,
-				9FE97E5D2295E66E00D43447 /* ViewController.swift */,
 				9FE97E5F2295E66E00D43447 /* Main.storyboard */,
+				9FE97E892295E6AD00D43447 /* ColorThemeTableViewController.swift */,
+				9FE97E8D2295E80900D43447 /* ColorThemeTableViewController.xib */,
+				9FE97E8F2295E8D000D43447 /* SliderTableViewCell.xib */,
+				9FE97E912296EBF800D43447 /* SliderTableViewCell.swift */,
+				9F34856D229EE1E000C95C1D /* StoredColorTableViewCell.swift */,
+				9F34856E229EE1E000C95C1D /* StoredColorTableViewCell.xib */,
+				9FE97E8B2295E77600D43447 /* InitialViewController.swift */,
+				9F34856B229ED37A00C95C1D /* DefaultsManager.swift */,
 				9FE97E622295E67000D43447 /* Assets.xcassets */,
 				9FE97E642295E67000D43447 /* LaunchScreen.storyboard */,
 				9FE97E672295E67000D43447 /* Info.plist */,
@@ -230,7 +251,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FE97E662295E67000D43447 /* LaunchScreen.storyboard in Resources */,
+				9FE97E8E2295E80900D43447 /* ColorThemeTableViewController.xib in Resources */,
+				9FE97E902295E8D000D43447 /* SliderTableViewCell.xib in Resources */,
 				9FE97E632295E67000D43447 /* Assets.xcassets in Resources */,
+				9F348570229EE1E000C95C1D /* StoredColorTableViewCell.xib in Resources */,
 				9FE97E612295E66E00D43447 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FE97E5E2295E66E00D43447 /* ViewController.swift in Sources */,
+				9F34856F229EE1E000C95C1D /* StoredColorTableViewCell.swift in Sources */,
+				9FE97E8C2295E77600D43447 /* InitialViewController.swift in Sources */,
 				9FE97E5C2295E66E00D43447 /* AppDelegate.swift in Sources */,
+				9F34856C229ED37A00C95C1D /* DefaultsManager.swift in Sources */,
+				9FE97E922296EBF800D43447 /* SliderTableViewCell.swift in Sources */,
+				9FE97E8A2295E6AD00D43447 /* ColorThemeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
